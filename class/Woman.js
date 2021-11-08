@@ -11,7 +11,7 @@ export default class Woman extends Human {
 
     const { maxChildren } = props;
     this.gender = 'female';
-    this.maxChildren = maxChildren ?? Math.floor(Math.random() * (4 - 1) + 1);
+    this.maxChildren = maxChildren ?? Math.floor(Math.random() * (5 - 1) + 1);
     this.children = [];
   }
 

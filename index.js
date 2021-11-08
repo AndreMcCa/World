@@ -1,18 +1,18 @@
-import World from "./class/World.js";
-import Man from "./class/Man.js";
-import Woman from "./class/Woman.js";
+import World from './class/World.js';
+import Man from './class/Man.js';
+import Woman from './class/Woman.js';
 
 // ========= Canvas ========= >
 
-const canvas = document.createElement("canvas");
-const context = canvas.getContext("2d");
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
 
 document.body.prepend(canvas);
 
 let w = (canvas.width = innerWidth);
 let h = (canvas.height = innerHeight);
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   w = canvas.width = innerWidth;
   h = canvas.height = innerHeight;
 });
@@ -22,8 +22,8 @@ window.addEventListener("resize", () => {
 const defaultOptions = {
   population: [
     new Woman({
-      name: "Eva",
-      eyes: "rgb(255,0,102)",
+      name: 'Eva',
+      eyes: 'rgb(255,0,102)',
       age: 18,
       weight: 9,
       maxChildren: 5,
@@ -35,8 +35,8 @@ const defaultOptions = {
       velocityY: -1,
     }),
     new Man({
-      name: "Adam",
-      eyes: "rgb(102,0,255)",
+      name: 'Adam',
+      eyes: 'rgb(102,0,255)',
       age: 18,
       weight: 9,
       birthDay: -18,
@@ -57,21 +57,34 @@ function showStatus() {
   const population = world.population.length;
   const year = World.getCurrentTime();
   const total = world.totalPeople;
+  const mans = world.population.reduce((acc, el) => {
+    return el.gender === 'male' ? acc + 1 : acc;
+  }, 0);
 
-  context.font = "20px sans-serif";
-  context.textAlign = "right";
-  context.fillStyle = "rgb(255,0,21)";
+  context.font = '20px sans-serif';
+  context.textAlign = 'right';
+  context.fillStyle = 'rgb(255,0,21)';
   context.fillText(`People: ${population}`, innerWidth - 20, 50);
 
-  context.font = "20px sans-serif";
-  context.textAlign = "right";
-  context.fillStyle = "rgb(255,0,21)";
+  context.font = '20px sans-serif';
+  context.textAlign = 'right';
+  context.fillStyle = 'rgb(255,0,21)';
   context.fillText(`Year: ${year}`, innerWidth - 20, 80);
 
-  context.font = "20px sans-serif";
-  context.textAlign = "right";
-  context.fillStyle = "rgb(0,0,0)";
+  context.font = '20px sans-serif';
+  context.textAlign = 'right';
+  context.fillStyle = 'rgb(0,0,0)';
   context.fillText(`Total: ${total}`, innerWidth - 20, 110);
+
+  context.font = '20px sans-serif';
+  context.textAlign = 'right';
+  context.fillStyle = 'rgb(102,0,255)';
+  context.fillText(`Mans: ${mans}`, innerWidth - 20, 160);
+
+  context.font = '20px sans-serif';
+  context.textAlign = 'right';
+  context.fillStyle = 'rgb(255,0,102)';
+  context.fillText(`Womans: ${population - mans}`, innerWidth - 20, 190);
 }
 
 function loop() {
@@ -86,7 +99,7 @@ function loop() {
 // ============================= >
 
 function reDrawBackgroun() {
-  context.fillStyle = "#c9e9ff";
+  context.fillStyle = '#c9e9ff';
   context.fillRect(0, 0, w, h);
 }
 
@@ -100,7 +113,7 @@ function reDrawHumans() {
 }
 
 function reDrawLines() {
-  const {population} = world;
+  const { population } = world;
   const quantityPeople = population.length;
 
   for (let i = 0; i < quantityPeople; i += 1) {
